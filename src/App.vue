@@ -2,12 +2,17 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
+    <topHead></topHead>
   </div>
 </template>
 
 <script>
+import topHead from '@/components/public/topHead'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    topHead
+  }
 }
 </script>
 
