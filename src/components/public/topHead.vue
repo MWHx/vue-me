@@ -1,26 +1,27 @@
 <template>
-  <div>
+  <div id="topHead">
     <template>
       <el-table
-        :data="tableData"
+        :data="nose"
         border
         style="width: 100%">
         <el-table-column
-          prop="date"
+          prop="nostId"
           label="日期"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="nostTitle"
           label="姓名"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="address"
+          prop="nostPictures"
           label="地址">
         </el-table-column>
       </el-table>
     </template>
+    <!--{{nose}}-->
   </div>
 </template>
 
@@ -29,43 +30,48 @@
         name: "topHead",
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }],
-
+          nose:[],
         }
       },
         methods:{
-          wna(){
-            this.axios.get('/api/cms/nologin/getRecommendCourses').then((response) => {
-              console.log(response.data.data.length);
-              console.log(this.tableData[1].date);
-              console.log(response.data.data[1].curriculaTime);
+          dataList(){
+            this.axios.get(`/api/cms/nologin/getRecommendCourses`,{})
+              .then(response=>{
+                console.log(response);
+                let nose = response.data.data,nostArr =[];
+                for(let i = 0;i<nose.length;i++){
+                  nostArr.push({
+                    nostId:nose[i].id,
+                    nostTitle:nose[i].title,
+                    nostPictures:nose[i].pictures
+                  });
+                  this.nose = nostArr
+                }
+              })
+              .catch(err=>{
+                console.log(err);
+              })
 
-               for(let  i = 0; i< response.data.data.length;i++){
-                  // this.tableData[i].date = response.data.data[i].curriculaTime;
-                  this.tableData[i].name = response.data.data[i].title;
-                  this.tableData[i].address = response.data.data[i].title;
-               }
-            })
           }
+          // wna(){
+          //   this.axios.get('/api/cms/nologin/getRecommendCourses', {})
+          //   .then(response=>{
+          //     let nose = response.data.data,noseArr =[];
+          //     console.log(nose);
+          //     for(let i = 0;i<nose.length;i++){
+          //       noseArr.push({
+          //         nostTitle:nose[i].title,
+          //         nostlowPrice:nose[i].lowPrice
+          //       });
+          //       this.nose = noseArr
+          //     }
+          //   })
+          //     .catch(err => {
+          //       console.log(err)
+          //     })
         },
       mounted(){
-        this.wna();
+          this.dataList()
       },
 
     }
@@ -73,4 +79,9 @@
 
 <style scoped>
 
+</style>
+<style>
+  #topHead .el-table th>.cell{
+      text-align: center;
+  }
 </style>
