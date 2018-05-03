@@ -2,16 +2,18 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
-    <topHead></topHead>
+   <home2></home2>
   </div>
 </template>
 
 <script>
 import topHead from '@/components/public/topHead'
+import home2 from '@/components/next/home2'
 export default {
   name: 'App',
   components:{
-    topHead
+    topHead,
+    home2
   }
 }
 </script>
