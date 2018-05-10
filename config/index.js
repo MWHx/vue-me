@@ -5,36 +5,35 @@
 const path = require('path')
 
 module.exports = {
-  dev:{
-    env: require('./dev.env'),
-    port: 8002,
-    autoOpenBrowser: true,
+  dev: {
+
+    // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api':{
-        target:'http://i.cyixue.com/api',
-        //target:'http://ceshi.iqihang.com:99/api',
-        changeOrigin:true,
-        pathRewrite:{
-          '^/api':''
-        }
-      },
-      '/es':{
-        target:'http://i.cyixue.com/es',
-        //target:'http://ceshi.iqihang.com:99/es',
-        changeOrigin:true,
-        pathRewrite:{
-          '^/es':''
-        }
-      }
-    },
-    // CSS Sourcemaps off by default because relative paths are "buggy"
-    // with this option, according to the CSS-Loader README
-    // (https://github.com/webpack/css-loader#sourcemaps)
-    // In our experience, they generally work as expected,
-    // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    proxyTable: {},
+
+    // Various Dev Server settings
+    host: 'localhost', // can be overwritten by process.env.HOST
+    port: 8004, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    autoOpenBrowser: true,
+    errorOverlay: true,
+    notifyOnErrors: true,
+    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+
+
+    /**
+     * Source Maps
+     */
+
+    // https://webpack.js.org/configuration/devtool/#development
+    devtool: 'cheap-module-eval-source-map',
+
+    // If you have problems debugging vue-files in devtools,
+    // set this to false - it *may* help
+    // https://vue-loader.vuejs.org/en/options.html#cachebusting
+    cacheBusting: true,
+
+    cssSourceMap: true
   },
 
   build: {

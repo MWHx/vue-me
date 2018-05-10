@@ -1,6 +1,6 @@
-# y
+# vue-me
 
-> This is a vue project
+> A Vue.js project
 
 ## Build Setup
 
